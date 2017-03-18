@@ -32,13 +32,12 @@ SERVO3 = ""
 def setup_pin(pinNo, mode):
   if pinNo != "":
     try:
-      print "Pin ", pinNo, " set as "
       if mode:
-        print "Input"
         GPIO.setup(pinNo, GPIO.IN)
+        print "Pin ", pinNo, " set as Input"
       else:
-        print "Output"
         GPIO.setup(pinNo, GPIO.OUT)
+        print "Pin ", pinNo, " set as Output"
     except:
       print "Error setting up pin ", pinNo
       
