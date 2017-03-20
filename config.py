@@ -6,6 +6,9 @@
 ################################################################
 
 import RPi.GPIO as GPIO
+import threading
+
+thread_lock = threading.Lock()
 
 mode = "BOARD" #define the pin numbering system to be used. (BOARD, BCM)
 warnings = "OFF" #change to "ON" to enable warnings
@@ -40,27 +43,28 @@ def setup_pin(pinNo, mode):
         print "Pin ", pinNo, " set as Output"
     except:
       print "Error setting up pin ", pinNo
-      
-if mode == "BOARD":
-  print "Using BOARD numbering system."
-  GPIO.setmode(GPIO.BOARD)
-else:
-  print "Using BCM numbering system."
-  GPIO.setmode(GPIO.BCM) 
 
-if warnings == "OFF":
-  print "Warnings OFF."
-  GPIO.setwarnings(False)
+def initialize():      
+  if mode == "BOARD":
+    print "Using BOARD numbering system."
+    GPIO.setmode(GPIO.BOARD)
+  else:
+    print "Using BCM numbering system."
+    GPIO.setmode(GPIO.BCM) 
+  
+  if warnings == "OFF":
+    print "Warnings OFF."
+    GPIO.setwarnings(False)
 
-setup_pin(A_FORWARD, 0)
-setup_pin(A_REVERSE, 0)
-setup_pin(B_FORWARD, 0)
-setup_pin(B_REVERSE, 0)
-setup_pin(TRIG1, 0)
-setup_pin(TRIG2, 0)
-setup_pin(TRIG3, 0)
-setup_pin(TRIG4, 0)
-setup_pin(TRIG5, 0)
-setup_pin(SERVO1, 0)
-setup_pin(SERVO2, 0)
-setup_pin(SERVO3, 0)
+  setup_pin(A_FORWARD, 0)
+  setup_pin(A_REVERSE, 0)
+  setup_pin(B_FORWARD, 0)
+  setup_pin(B_REVERSE, 0)
+  setup_pin(TRIG1, 0)
+  setup_pin(TRIG2, 0)
+  setup_pin(TRIG3, 0)
+  setup_pin(TRIG4, 0)
+  setup_pin(TRIG5, 0)
+  setup_pin(SERVO1, 0)
+  setup_pin(SERVO2, 0)
+  setup_pin(SERVO3, 0)
