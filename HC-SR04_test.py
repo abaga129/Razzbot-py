@@ -1,5 +1,5 @@
 #####################################
-# hc-sr04_test.py
+# HC-SR04_test.py
 # Written By Ethan Reker 2017
 #####################################
 
@@ -17,7 +17,8 @@ ECHO = int(ECHO)
 GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(ECHO, GPIO.IN)
 
-while True:
+cont = ""
+while cont!="n":
   GPIO.output(TRIG, GPIO.LOW)
   time.sleep(2)
   
@@ -38,8 +39,6 @@ while True:
   print "Distance: ", distance, "cm"
   
   cont = raw_input("Continue?(y/n): ")
-  if cont == "n":
-    break
     
 GPIO.cleanup()
 print "Test Complete."
