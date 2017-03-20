@@ -9,9 +9,11 @@ import time
 GPIO.setmode(GPIO.BOARD)
 print "Using BOARD numbering system for GPIO pins."
 
-TRIG = raw_input("Enter Pin # that is connected to TRIG: ")
-ECHO = raw_input("Enter Pin # that is connected to ECHO: ")
+TRIG = raw_input("Enter Pin Number that is connected to TRIG: ")
+ECHO = raw_input("Enter Pin Number that is connected to ECHO: ")
 
+TRIG = int(TRIG)
+ECHO = int(ECHO)
 GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(ECHO, GPIO.IN)
 
@@ -20,12 +22,13 @@ while True:
   time.sleep(2)
   
   GPIO.output(TRIG, GPIO.HIGH)
-  time.sleep(0.00001)
+  time.sleep(0.0001)
   GPIO.output(TRIG, GPIO.LOW)
   
+  print "Waiting for rising edge."
   GPIO.wait_for_edge(ECHO, GPIO.RISING)
   start_time = time.time()
-  
+
   GPIO.wait_for_edge(ECHO, GPIO.FALLING)
   end_time = time.time()
   
@@ -34,8 +37,8 @@ while True:
   distance = round(distance, 2)
   print "Distance: ", distance, "cm"
   
-  continue = raw_input("Continue?(y/n): ")
-  if continue == "n":
+  cont = raw_input("Continue?(y/n): ")
+  if cont == "n":
     break
     
 GPIO.cleanup()
