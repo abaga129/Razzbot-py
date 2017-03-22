@@ -6,7 +6,9 @@
 #########################################################
 
 import threading
-import conf
+import config as conf
+import RPi.GPIO as GPIO
+import time
 
 class HCSR04(threading.Thread):
   TRIG = 0
@@ -20,32 +22,41 @@ class HCSR04(threading.Thread):
     self.TRIG = TRIG
     self.ECHO = ECHO
     self.name = name
-             
+    GPIO.setup(TRIG, GPIO.OUT)
+    GPIO.setup(ECHO, GPIO.IN)    
+         
   def run(self):
     keep = True
     while keep==True:
-      GPIO.output(TRIG, GPIO.LOW)
-      time.sleep(2)
+      GPIO.output(self.TRIG, GPIO.LOW)
+      time.sleep(0.1)
       
-      GPIO.output(TRIG, GPIO.HIGH)
+      GPIO.output(self.TRIG, GPIO.HIGH)
       time.sleep(0.00001)
-      GPIO.output(TRIG, GPIO.LOW)
+      GPIO.output(self.TRIG, GPIO.LOW)
       
-      GPIO.wait_for_edge(ECHO, GPIO.RISING)
+      #print "Waiting For Edge"
+      GPIO.wait_for_edge(self.ECHO, GPIO.RISING, timeout=1000)
       start_time = time.time()
-      GPIO.wait_for_edge(ECHO, GPIO.FALLING)
+      GPIO.wait_for_edge(self.ECHO, GPIO.FALLING, timeout=2000)
       end_time = time.time()
       
-      duration = start_time - end_time
+      
+      duration = end_time - start_time
       dist = duration * 17150
+      #print "Distance ", dist, "Duration ", duration
+      if dist > 400 or dist < 3:
+        dist = 0
+      #print "Waiting for lock"
       conf.thread_lock.acquire()
-      distance = dist
+      self.distance = dist
       conf.thread_lock.release()
       
   #Do not call this until conf.initialize() has been called in main program.
   def read(self):
+    #print "Reading"
     conf.thread_lock.acquire()
-    ret = distance
+    ret = self.distance
     conf.thread_lock.release()
     return ret
   
