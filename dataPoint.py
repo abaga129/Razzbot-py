@@ -7,3 +7,9 @@ class DataPoint:
   distance = 0
   direction = ""
   sensorId = ""
+  
+  def __init__(self, captureTime, distance, direction, sensorId):
+    this.captureTime = captureTime
+    this.distance = distance
+    this.direction = direction
+    this.sensorId = sensorId
