@@ -1,7 +1,8 @@
 ######################################
-#
-#
-#
+#  Author: Ethan Reker
+#  Date: April 10, 2017 
+#  Purpose: Provide a unit to perform basic logic
+#  from data read by sensors
 ######################################
 
 class LogicalUnit:
