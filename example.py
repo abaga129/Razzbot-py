@@ -26,7 +26,7 @@ sensor1 = HCSR04.HCSR04(16, 18, "FRONT")
 
 sensor1.start()
 
-motor_ctrl = L298N.L298N(7, 11, 12, 13)
+motor_ctrl = L298N.L298N(22, 11, 12, 13)
 motor_ctrl.start()
 
 while True:
@@ -37,6 +37,8 @@ while True:
             stopCount = stopCount + 1
             print "STOP"
             motor_ctrl.setMode("STOP")
+#            if distance == 0:
+#                continue
             if stopCount > 2:
               turn()
               stopCount = 0
