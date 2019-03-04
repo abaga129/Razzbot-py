@@ -23,14 +23,32 @@ stopCount = 0
 
 config.initialize()
 
-# sensor1 = HCSR04.HCSR04(37, 38, "FRONT")
+sensor1 = HCSR04.HCSR04(37, 38, "FRONT")
 
-# sensor1.run()
+sensor1.start()
 
 motor_ctrl = L298N.L298N(22, 11, 12, 13)
 motor_ctrl.start()
 motor_ctrl.setMode("FORWARD")
 
+try:
+  while True:
+    distance = sensor1.read()
+    print "Distance ", distance
+    if(distance < 40):
+      print "STOPPING"
+      motor_ctrl.setMode("STOP")
+      time.sleep(1)
+      turn()
+    else:
+      print "FORWARD"
+      motor_ctrl.setMode("FORWARD")
+      time.sleep(1)
+except KeyboardInterrupt:
+  motor_ctrl._stop()
+  sensor1._stop()
+  sys.exit()
+  
 # try:
 #   while True:
 # 	distance = sensor1.read()
