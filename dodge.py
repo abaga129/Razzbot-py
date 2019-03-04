@@ -10,6 +10,8 @@ import sys
 import HCSR04
 import L298N
 
+STOP_DISTANCE = 30
+
 def turn():
   stopCount = 0
   print "TURN"
@@ -23,27 +25,37 @@ stopCount = 0
 
 config.initialize()
 
-sensor1 = HCSR04.HCSR04(37, 38, "FRONT")
-
-sensor1.start()
+sensorC = HCSR04.HCSR04(37, 38, "FRONT")
+sensorC.start()
+sensorL = HCSR04.HCSR04(35, 36, "LEFT")
+sensorL.start()
+sensorR = HCSR04.HCSR04(37, 38, "RIGHT")
+sensorR.start()
 
 motor_ctrl = L298N.L298N(22, 11, 12, 13)
 motor_ctrl.start()
 motor_ctrl.setMode("FORWARD")
 
+def checkDistances():
+  center = sensorC.read()
+  left = sensorL.read()
+  right = sensorR.read()
+  print "Center ", center, " Left ", left, " Right ", right
+  return  center < STOP_DISTANCE || left < STOP_DISTANCE || right < STOP_DISTANCE
+
 try:
   while True:
-    distance = sensor1.read()
+    distanceCheck = checkDistances()
     print "Distance ", distance
-    if(distance < 40):
+    if(distanceCheck):
       print "STOPPING"
       motor_ctrl.setMode("STOP")
-      time.sleep(1)
+      time.sleep(0.1)
       turn()
     else:
       print "FORWARD"
       motor_ctrl.setMode("FORWARD")
-      time.sleep(1)
+      time.sleep(0.1)
 except KeyboardInterrupt:
   motor_ctrl._stop()
   sensor1._stop()
