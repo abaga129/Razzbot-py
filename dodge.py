@@ -43,12 +43,12 @@ def checkDistances():
   right = sensorR.read()
   print "Center " + str(center) + " Left " + str(left) + " Right " + str(right)
   # return  center < STOP_DISTANCE or left < STOP_DISTANCE or right < STOP_DISTANCE
-  return center < STOP_DISTANCE
+  return center
 
 try:
   while True:
     distanceCheck = checkDistances()
-    if(distanceCheck):
+    if distanceCheck < 40:
       print "STOPPING"
       motor_ctrl.setMode("STOP")
       time.sleep(0.1)
