@@ -29,7 +29,8 @@ sensor1.start()
 motor_ctrl = L298N.L298N(22, 11, 12, 13)
 motor_ctrl.start()
 
-while True:
+try:
+  while True:
 	print "FRONT: ", sensor1.read()
 	distance = sensor1.read()
         time.sleep(0.05)
@@ -44,5 +45,8 @@ while True:
         else:
             print "FORWARD"
             motor_ctrl.setMode("FORWARD")
+except: KeyboardInterrupt:
+  print "Exiting program"
+
         
         
