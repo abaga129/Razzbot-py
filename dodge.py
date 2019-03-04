@@ -28,7 +28,7 @@ config.initialize()
 # sensor1.run()
 
 motor_ctrl = L298N.L298N(22, 11, 12, 13)
-motor_ctrl.run()
+motor_ctrl.start()
 motor_ctrl.setMode("FORWARD")
 
 # try:
