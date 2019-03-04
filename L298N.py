@@ -72,6 +72,7 @@ class L298N(threading.Thread):
       time.sleep(0.1)
 
   def setMode(self, mode):
+    print "Setting mode to ", mode
   	conf.thread_lock.acquire()
   	self.mode = mode
   	conf.thread_lock.release()
