@@ -45,6 +45,7 @@ class L298N(threading.Thread):
         GPIO.output(self.A1, GPIO.LOW)
         GPIO.output(self.B0, GPIO.HIGH)
         GPIO.output(self.B1, GPIO.LOW)
+        print "RUNNING FORWARD"
 
       if mode == "BACKWARD":
         GPIO.output(self.A0, GPIO.LOW)

@@ -29,6 +29,7 @@ config.initialize()
 
 motor_ctrl = L298N.L298N(22, 11, 12, 13)
 motor_ctrl.run()
+motor_ctrl.setMode("FORWARD")
 
 # try:
 #   while True:
