@@ -41,7 +41,7 @@ def checkDistances():
   left = sensorL.read()
   right = sensorR.read()
   print "Center ", center, " Left ", left, " Right ", right
-  return  center < STOP_DISTANCE || left < STOP_DISTANCE || right < STOP_DISTANCE
+  return  center < STOP_DISTANCE or left < STOP_DISTANCE or right < STOP_DISTANCE
 
 try:
   while True:
