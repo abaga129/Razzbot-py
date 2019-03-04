@@ -25,15 +25,15 @@ config.initialize()
 
 sensor1 = HCSR04.HCSR04(37, 38, "FRONT")
 
-sensor1.start()
+sensor1.run()
 
 motor_ctrl = L298N.L298N(22, 11, 12, 13)
 motor_ctrl.start()
 
 try:
   while True:
-	print "FRONT: ", sensor1.read()
 	distance = sensor1.read()
+  print "FRONT: ", distance
         time.sleep(0.05)
         if distance < 40:
             stopCount = stopCount + 1
@@ -46,7 +46,7 @@ try:
         else:
             print "FORWARD"
             motor_ctrl.setMode("FORWARD")
-except: KeyboardInterrupt:
+except KeyboardInterrupt:
   print "Exiting program"
   sys.exit()
 
