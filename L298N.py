@@ -18,6 +18,8 @@ class L298N(threading.Thread):
   mode = "STOP"  
 
   def __init__(self, A0, A1, B0, B1):
+    print "init L298N"
+    print self.mode 
     threading.Thread.__init__(self)
     self.A0 = A0
     self.A1 = A1
@@ -29,7 +31,10 @@ class L298N(threading.Thread):
     GPIO.setup(self.B1, GPIO.OUT)
 
   def run(self):
+    print "self L298N"
     while True:
+      print "run call"
+      print self.mode
       conf.thread_lock.acquire()	
       mode = self.mode	
       conf.thread_lock.release()
