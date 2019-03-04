@@ -10,7 +10,7 @@ import sys
 import HCSR04
 import L298N
 
-STOP_DISTANCE = 30
+STOP_DISTANCE = 40
 
 def turn():
   stopCount = 0
@@ -29,7 +29,7 @@ sensorC = HCSR04.HCSR04(37, 38, "FRONT")
 sensorC.start()
 sensorL = HCSR04.HCSR04(35, 36, "LEFT")
 sensorL.start()
-sensorR = HCSR04.HCSR04(37, 38, "RIGHT")
+sensorR = HCSR04.HCSR04(31, 32, "RIGHT")
 sensorR.start()
 
 motor_ctrl = L298N.L298N(22, 11, 12, 13)
@@ -41,7 +41,8 @@ def checkDistances():
   left = sensorL.read()
   right = sensorR.read()
   print "Center ", center, " Left ", left, " Right ", right
-  return  center < STOP_DISTANCE or left < STOP_DISTANCE or right < STOP_DISTANCE
+  # return  center < STOP_DISTANCE or left < STOP_DISTANCE or right < STOP_DISTANCE
+  return center < STOP_DISTANCE
 
 try:
   while True:
