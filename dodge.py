@@ -37,17 +37,17 @@ motor_ctrl.start()
 motor_ctrl.setMode("FORWARD")
 
 def checkDistances():
+  print "Checking distances"
   center = sensorC.read()
   left = sensorL.read()
   right = sensorR.read()
-  print "Center ", center, " Left ", left, " Right ", right
+  print "Center " + str(center) + " Left " + str(left) + " Right " + str(right)
   # return  center < STOP_DISTANCE or left < STOP_DISTANCE or right < STOP_DISTANCE
   return center < STOP_DISTANCE
 
 try:
   while True:
     distanceCheck = checkDistances()
-    print "Distance ", distance
     if(distanceCheck):
       print "STOPPING"
       motor_ctrl.setMode("STOP")
