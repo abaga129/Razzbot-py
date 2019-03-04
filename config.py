@@ -14,18 +14,20 @@ mode = "BOARD" #define the pin numbering system to be used. (BOARD, BCM)
 warnings = "OFF" #change to "ON" to enable warnings
 
 # L298N Pins
-A_FORWARD = 7
+A_FORWARD = 22
 A_REVERSE = 11
 B_FORWARD = 12
 B_REVERSE = 13
 
 # HC_SR04 Pins
-TRIG1 = ""
-TRIG2 = ""
-TRIG3 = ""
+TRIG1 = 31
+TRIG2 = 35
+TRIG3 = 37
 TRIG4 = ""
 TRIG5 = ""
-ECHO = ""
+ECHO1 = 32
+ECHO2 = 36
+ECHO3 = 38
 
 # SG90 Pins
 SERVO1 = ""
@@ -63,8 +65,11 @@ def initialize():
   setup_pin(TRIG1, 0)
   setup_pin(TRIG2, 0)
   setup_pin(TRIG3, 0)
-  setup_pin(TRIG4, 0)
-  setup_pin(TRIG5, 0)
-  setup_pin(SERVO1, 0)
-  setup_pin(SERVO2, 0)
-  setup_pin(SERVO3, 0)
+  setup_pin(ECHO1, null)
+  setup_pin(ECHO2, null)
+  setup_pin(ECHO3, null)
+  # setup_pin(TRIG4, 0)
+  # setup_pin(TRIG5, 0)
+  # setup_pin(SERVO1, 0)
+  # setup_pin(SERVO2, 0)
+  # setup_pin(SERVO3, 0)
