@@ -5,6 +5,7 @@
 
 import RPi.GPIO as GPIO
 import time
+import sys
 import config
 import HCSR04
 import L298N
@@ -47,6 +48,7 @@ try:
             motor_ctrl.setMode("FORWARD")
 except: KeyboardInterrupt:
   print "Exiting program"
+  sys.exit()
 
         
         
