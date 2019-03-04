@@ -58,10 +58,10 @@ def initialize():
     print "Warnings OFF."
     GPIO.setwarnings(False)
 
-  setup_pin(A_FORWARD, 0)
-  setup_pin(A_REVERSE, 0)
-  setup_pin(B_FORWARD, 0)
-  setup_pin(B_REVERSE, 0)
+  # setup_pin(A_FORWARD, 0)
+  # setup_pin(A_REVERSE, 0)
+  # setup_pin(B_FORWARD, 0)
+  # setup_pin(B_REVERSE, 0)
   # setup_pin(TRIG1, 0)
   # setup_pin(TRIG2, 0)
   # setup_pin(TRIG3, 0)

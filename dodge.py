@@ -5,6 +5,7 @@
 
 import RPi.GPIO as GPIO
 import time
+import config;
 import sys
 import HCSR04
 import L298N
@@ -19,6 +20,8 @@ def turn():
   motor_ctrl.setMode("STOP")
 
 stopCount = 0
+
+config.initialize()
 
 # sensor1 = HCSR04.HCSR04(37, 38, "FRONT")
 
